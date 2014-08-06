@@ -1,15 +1,11 @@
+function PromotionCal(quantity){
+  this.quantity = quantity;
+  this.subtotal = [];
 
-var pro_caculator = function(subtotal){
+}
 
-    this.subtotal = subtotal;
-};
-
-pro_caculator.prototype.caculate = function(quantity){
+PromotionCal.prototype.getSubtotal = function(commodity){
 var promotions = loadPromotions();
-var save = [];
-var saveSum = [];
-var total = 0;
-var totalSave = 0;
 for(var i=0; i<commodity.length; i++)
   {
     for(var j=0; j<promotions.length; j++)
@@ -20,16 +16,46 @@ for(var i=0; i<commodity.length; i++)
             {
              if(commodity[i].barcode === proCodes[k])
               {
-                subtotal[i]=((parseInt(quantity[i]/3))*2*(commodity[i].price)
-                +(quantity[i]%3)*(commodity[i].price));
+                this.subtotal[i] = ((parseInt(this.quantity[i]/3))*2*(commodity[i].price)
+                +(this.quantity[i]%3)*(commodity[i].price));
                 break;
               }
             else
-               {subtotal[i]=commodity[i].price*quantity[i];}
+               {this.subtotal[i]=commodity[i].price*this.quantity[i];}
               }
-             save[i]=(commodity[i].price*quantity[i]-subtotal[i]);
-             saveSum[i]=parseInt(quantity[i]/3);
          }
   }
-return subtotal;
+return this.subtotal;
 }
+// PromotionCal.prototype.getPromotionSave = function(commodity){
+// this.commodity = commodity;
+// var promotions = loadPromotions();
+//   // var save = [];
+//     for(var i=0; i<this.commodity.length; i++)
+//       {
+//         for(var j=0; j<promotions.length; j++)
+//           if(promotions[j].type === 'BUY_TWO_GET_ONE_FREE')
+//              {
+//               var proCodes = promotions[j].barcodes;
+//               for(var k = 0; k<proCodes.length; k++)
+//                 {
+//                  save[i]=(this.commodity[i].price*this.quantity[i]-subtotal[i]);
+//                 }
+//              }
+//       }
+// return save;
+// }
+// PromotionCal.prototype.getPromotionSavesum = function(commodity){
+//   // var saveSum = [];
+//     for(var i=0; i<this.commodity.length; i++)
+//       {
+//         for(var j=0; j<promotions.length; j++)
+//           if(promotions[j].type === 'BUY_TWO_GET_ONE_FREE')
+//              {
+//               var proCodes = promotions[j].barcodes;
+//               for(var k = 0; k<proCodes.length; k++)
+//                 {
+//                  saveSum[i]=parseInt(this.quantity[i]/3);
+//                 }
+//              }return saveSum;
+//   }

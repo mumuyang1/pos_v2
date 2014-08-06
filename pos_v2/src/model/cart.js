@@ -1,22 +1,22 @@
-function cart(item,quantity){
-
-  this.quantity=quantity;
-
-
+function Cart(barcodes){
+  this.barcodes = barcodes;
+  this.quantity = [];
 }
-cart_item.prototype.quantity = function(barcode){
+
+Cart.prototype.calculate= function(){
   var commodity = loadAllItems();
-  var quantity = [];
 
   for(var i=0; i<commodity.length; i++){
-       goodsSum[i] = 0;
-      }
+       this.quantity[i] = 0;
+  }
 
-  for(var i=0; i<barcodes.length; i++){
+  for(var i=0; i<this.barcodes.length; i++){
+    console.log(this.barcodes[i]);
     for(var j=0;j<commodity.length;j++){
-      if (barcodes[i]===commodity[j].barcode){
-        quantity[j]++;
-                   }
+      if (this.barcodes[i]===commodity[j].barcode){
+        this.quantity[j]++;
+      }
     }
-return quantity;
-}
+  }
+  return this.quantity;
+};
